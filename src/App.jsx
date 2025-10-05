@@ -19,7 +19,7 @@ const questions = [
   {
     question: "Name a cybersecurity tool used to protect networks.",
     answers: [
-      { text: "Firewall", points: 30 },
+      { text: "Firewall", points: 40 },
       { text: "IDS (Intrusion Detection System)", points: 25 },
       { text: "VPN (Virtual Private Network)", points: 20 },
       { text: "Antivirus", points: 15 },
