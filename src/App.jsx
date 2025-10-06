@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+/*
+  EXACT updated questions (your 12-question set)
+*/
 const questions = [
   {
     question: "What kind of information is most at risk in a privacy breach/Cyber Hack?",
@@ -23,39 +26,106 @@ const questions = [
     ],
   },
   {
-    question: "A Privacy Breach has occurred. You are a Privacy Officer, what are some actions you may have to take?",
+    question: "A Privacy Breach has occured. You are a Privacy Officer, what are some actions you may have to take?",
     answers: [
       { text: "Contain the breach and Evaluate the scope", points: 30 },
       { text: "Investigate the breach", points: 25 },
-      { text: "Remediate and prevent recurrence", points: 20 },
+      { text: "Remediate the breach/prevent future occurences", points: 20 },
       { text: "Notify the patients", points: 15 },
       { text: "Notify the Information Privacy Commissioner (IPC)", points: 10 },
     ],
   },
   {
-    question: "Name the different types of privacy breaches according to the Information Privacy Commissioner (IPC).",
+    question: "Name the different types of privacy breaches according to the Information Privacy Commisionner (IPC)",
     answers: [
-      { text: "Disclosed without authority (Misdirected faxes, etc.)", points: 30 },
-      { text: "Used without authority (Unauthorized Access)", points: 25 },
-      { text: "Stolen information", points: 20 },
-      { text: "Lost records", points: 15 },
-      { text: "Collected without authority via EHR", points: 10 },
+      { text: "Personal health information in the custodian’s custody or control was disclosed without authority. (I.e. Misdirected Faxes, documents, etc.)", points: 30 },
+      { text: "Personal health information in the custodian’s custody or control was used without authority. (I.e. Unauthorized Access)", points: 25 },
+      { text: "Personal health information in the custodian’s custody or control was stolen.", points: 20 },
+      { text: "Personal health information in the custodian’s custody or control was lost.", points: 15 },
+      { text: "Personal health information was collected by the custodian by means of the electronic health record without authority.", points: 10 },
     ],
   },
   {
-    question: "Name a best practice for creating strong passwords.",
+    question: "Name a best practice for creating strong passwords?",
     answers: [
-      { text: "Use a mix of characters", points: 30 },
+      { text: "Use a mix of passwords", points: 30 },
       { text: "Avoid reuse", points: 25 },
       { text: "Enable MFA", points: 20 },
       { text: "Change regularly", points: 15 },
       { text: "Avoid dictionary words", points: 10 },
     ],
   },
+  {
+    question: "Name a method hackers use to steal information.",
+    answers: [
+      { text: "Phishing", points: 40 },
+      { text: "Fake websites/Popups/SPAM", points: 25 },
+      { text: "Malware", points: 20 },
+      { text: "Social Engineering", points: 15 },
+    ],
+  },
+  {
+    question: "What should you NOT do in an email?",
+    answers: [
+      { text: "Click unknown links", points: 35 },
+      { text: "Open suspicious attachments", points: 30 },
+      { text: "Share your password", points: 20 },
+      { text: "Ignore red flags", points: 15 },
+    ],
+  },
+  {
+    question: "Name a type of Threat Actor.",
+    answers: [
+      { text: "Hacker", points: 34 },
+      { text: "Script Kiddie", points: 33 },
+      { text: "APT (Advanced Persistent Threat)", points: 33 },
+    ],
+  },
+  {
+    question: "What's a way to stay safe online?",
+    answers: [
+      { text: "Use secure websites", points: 30 },
+      { text: "Keep software updated", points: 25 },
+      { text: "Avoid clicking unknown links", points: 20 },
+      { text: "Use strong passwords", points: 15 },
+      { text: "Be cauction on social media", points: 10 },
+    ],
+  },
+  {
+    question: "Under Canadian Laws, we must protection information from cyber attacks. What are some Canadian Privacy Laws?",
+    answers: [
+      { text: "Personal Health Information Protection Act (PHIPA)", points: 30 },
+      { text: "Freedom of Informationa and Protection of Privacy Act (FIPPA)", points: 25 },
+      { text: "The Privacy Act", points: 20 },
+      { text: "Personal Information Protection and Electronic Documents Act (PIPEDA)", points: 15 },
+      { text: "Personal Information Protection Act (PIPA)", points: 10 },
+    ],
+  },
+  {
+    question: "Name a type of malware.",
+    answers: [
+      { text: "Virus", points: 30 },
+      { text: "Worm", points: 25 },
+      { text: "Trojan", points: 20 },
+      { text: "Ransomware", points: 15 },
+    ],
+  },
+  {
+    question: "Name a Secure Login method.",
+    answers: [
+      { text: "Single Sign-on (SSO)", points: 35 },
+      { text: "Multi-Factor authentication (MFA)", points: 25 },
+      { text: "Biometrics", points: 20 },
+      { text: "Password Manager", points: 20 },
+    ],
+  },
 ];
 
 export default function App() {
+  // single, consistent "started" state for menu -> game
   const [started, setStarted] = useState(false);
+
+  // main game states (kept identical to your working version)
   const [round, setRound] = useState(0);
   const [revealed, setRevealed] = useState([]);
   const [scores, setScores] = useState({ team1: 0, team2: 0 });
@@ -96,6 +166,7 @@ export default function App() {
   }
 
   function resetGame() {
+    // reset everything and return to menu
     setStarted(false);
     setRound(0);
     setRevealed([]);
@@ -109,75 +180,74 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-700 text-white flex flex-col items-center justify-center p-8 font-sans">
       <AnimatePresence mode="wait">
-        {!started ? (
+        {/* START MENU */}
+        {!started && (
           <motion.div
             key="start"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.6 }}
             className="text-center"
           >
             <motion.div
               animate={{
                 rotate: [0, -10, 10, -5, 5, 0],
-                scale: [1, 1.05, 1],
+                scale: [1, 1.03, 1],
               }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatType: "mirror",
-              }}
-              className="inline-block mb-4 text-7xl drop-shadow-lg"
+              transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror" }}
+              className="inline-block mb-4 text-6xl drop-shadow-lg"
             >
               ⚔️
             </motion.div>
 
             <motion.h1
-              className="text-6xl font-extrabold mb-6 drop-shadow-lg"
-              animate={{
-                textShadow: [
-                  "0px 0px 10px #facc15",
-                  "0px 0px 25px #facc15",
-                  "0px 0px 10px #facc15",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="text-6xl font-extrabold mb-4 drop-shadow-lg"
+              initial={{ y: -10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
             >
               Privacy-Cyber Duel
             </motion.h1>
 
-            <p className="text-xl text-gray-200 mb-12">
-              Developed by <span className="text-yellow-300 font-semibold">Jeffrey Munroe</span>
-            </p>
+            <p className="text-lg text-indigo-100 mb-10">Developed by Jeffrey Munroe</p>
 
             <motion.button
-              whileHover={{ scale: 1.1, rotate: 2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08, rotate: 2 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => setStarted(true)}
               className="bg-yellow-400 text-black px-8 py-4 rounded-2xl text-2xl font-bold shadow-lg hover:bg-yellow-300"
             >
-              Start Game
+              ⚔️ Start Duel
             </motion.button>
           </motion.div>
-        ) : (
+        )}
+
+        {/* MAIN GAME */}
+        {started && (
           <motion.div
             key="game"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.45 }}
             className="w-full flex flex-col items-center"
           >
-            {/* Title */}
             <h1 className="text-5xl font-extrabold mb-4 tracking-wide drop-shadow-lg">
               ⚔️ Privacy-Cyber Duel
             </h1>
-            <h2 className="text-2xl font-semibold mb-6 text-yellow-300">
-              Round {round + 1} of {questions.length}
-            </h2>
 
-            {/* Host Mode */}
+            <motion.h2
+              key={round}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1.05, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 140, damping: 12 }}
+              className="text-2xl font-semibold mb-6 text-yellow-300"
+            >
+              Round {round + 1} of {questions.length}
+            </motion.h2>
+
+            {/* Host Mode Toggle */}
             <div className="mb-6 flex items-center gap-4">
               <label className="flex items-center gap-2 bg-indigo-600 px-4 py-2 rounded-xl shadow">
                 <input
@@ -190,7 +260,7 @@ export default function App() {
               </label>
             </div>
 
-            {/* Question & Answers */}
+            {/* Question Card */}
             <div className="bg-indigo-700 p-8 rounded-3xl shadow-2xl w-full max-w-5xl border-4 border-yellow-400">
               <h2 className="text-3xl font-bold mb-6 text-center">{currentQ.question}</h2>
               <div style={{ perspective: 1200 }} className="grid grid-cols-2 gap-6">
@@ -209,7 +279,7 @@ export default function App() {
                           initial={{ rotateY: 90, opacity: 0 }}
                           animate={{ rotateY: 0, opacity: 1 }}
                           exit={{ rotateY: -90, opacity: 0 }}
-                          transition={{ duration: 0.45 }}
+                          transition={{ duration: 0.45, type: "spring", stiffness: 120 }}
                           className="flex justify-between w-full px-2"
                         >
                           <span>{ans.text}</span>
@@ -221,6 +291,7 @@ export default function App() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
+                          transition={{ duration: 0.25 }}
                           className="tracking-widest"
                         >
                           ???
@@ -235,10 +306,7 @@ export default function App() {
             {/* Scores */}
             <div className="flex gap-8 mt-8 items-center">
               {["team1", "team2"].map((team, i) => (
-                <div
-                  key={team}
-                  className="bg-indigo-600 px-6 py-4 rounded-2xl shadow-lg text-2xl"
-                >
+                <div key={team} className="bg-indigo-600 px-6 py-4 rounded-2xl shadow-lg text-2xl">
                   Team {i + 1}:{" "}
                   <motion.span
                     key={scores[team]}
@@ -251,6 +319,23 @@ export default function App() {
                   </motion.span>
                 </div>
               ))}
+
+              <div className="flex gap-3 items-center ml-2">
+                <button
+                  onClick={() => awardPoints("team1")}
+                  className="bg-green-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-green-400"
+                  disabled={roundPoints === 0}
+                >
+                  Award → Team 1
+                </button>
+                <button
+                  onClick={() => awardPoints("team2")}
+                  className="bg-green-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-green-400"
+                  disabled={roundPoints === 0}
+                >
+                  Award → Team 2
+                </button>
+              </div>
             </div>
 
             {/* Round Points */}
@@ -269,19 +354,19 @@ export default function App() {
 
             {/* Strikes */}
             <div className="mt-6 text-center">
-              <motion.p
-                key={strikes}
-                initial={{ scale: 0.6, opacity: 0 }}
-                animate={{ scale: 1.15, opacity: 1 }}
-                className="text-3xl font-bold text-red-400 mb-3"
-              >
-                Strikes: {"X ".repeat(strikes)}
-              </motion.p>
-              <div className="flex gap-3 justify-center">
-                <button
-                  onClick={addStrike}
-                  className="bg-red-600 px-6 py-2 rounded-xl font-bold shadow hover:bg-red-500"
+              <div className="mb-3">
+                <motion.p
+                  key={strikes}
+                  initial={{ scale: 0.6, opacity: 0 }}
+                  animate={{ scale: 1.15, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 12 }}
+                  className="text-3xl font-bold text-red-400"
                 >
+                  Strikes: {"X ".repeat(strikes)}
+                </motion.p>
+              </div>
+              <div className="flex gap-3 justify-center">
+                <button onClick={addStrike} className="bg-red-600 px-6 py-2 rounded-xl font-bold shadow hover:bg-red-500">
                   Add Strike
                 </button>
                 <button
@@ -298,49 +383,44 @@ export default function App() {
             </div>
 
             {/* Steal Mode */}
-            <AnimatePresence>
-              {stealMode && (
-                <motion.div
-                  initial={{ x: 300, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: 300, opacity: 0 }}
-                  transition={{ duration: 0.45 }}
-                  className="bg-yellow-400 text-black px-6 py-4 mt-6 rounded-2xl shadow-xl text-center"
-                >
-                  <div className="text-2xl font-bold mb-3">Steal Mode Active!</div>
-                  <div className="flex gap-3 justify-center">
-                    <button
-                      onClick={() => awardPoints("team1")}
-                      className="bg-green-600 px-4 py-2 rounded-lg font-semibold"
-                    >
-                      Award to Team 1
-                    </button>
-                    <button
-                      onClick={() => awardPoints("team2")}
-                      className="bg-green-600 px-4 py-2 rounded-lg font-semibold"
-                    >
-                      Award to Team 2
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div className="mt-6">
+              <AnimatePresence>
+                {stealMode && (
+                  <motion.div
+                    initial={{ x: 300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: 300, opacity: 0 }}
+                    transition={{ duration: 0.45 }}
+                    className="bg-yellow-400 text-black px-6 py-4 rounded-2xl shadow-xl text-center"
+                  >
+                    <div className="text-2xl font-bold mb-3">Steal Mode Active!</div>
+                    <div className="flex gap-3 justify-center">
+                      <button onClick={() => awardPoints("team1")} className="bg-green-600 px-4 py-2 rounded-lg font-semibold">
+                        Award to Team 1
+                      </button>
+                      <button onClick={() => awardPoints("team2")} className="bg-green-600 px-4 py-2 rounded-lg font-semibold">
+                        Award to Team 2
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
-            {/* Next & Reset */}
+            {/* Controls */}
             <div className="flex gap-4 mt-8">
-              <button
-                onClick={nextRound}
-                className="bg-yellow-400 text-black px-6 py-3 rounded-xl font-bold shadow hover:bg-yellow-300"
-              >
+              <button onClick={nextRound} className="bg-yellow-400 text-black px-6 py-3 rounded-xl font-bold shadow hover:bg-yellow-300">
                 Next Round ➡️
               </button>
-              <button
-                onClick={resetGame}
-                className="bg-gray-400 text-black px-6 py-3 rounded-xl font-bold shadow hover:bg-gray-300"
-              >
-                Reset Game
+              <button onClick={resetGame} className="bg-red-500 text-white px-6 py-3 rounded-xl font-bold shadow hover:bg-red-400">
+                Reset Game 🔄
               </button>
             </div>
+
+            {/* Footer */}
+            <footer className="mt-8 text-sm text-indigo-200 opacity-80">
+              Developed by Jeffrey Munroe © {new Date().getFullYear()}
+            </footer>
           </motion.div>
         )}
       </AnimatePresence>
