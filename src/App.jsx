@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /*
-  EXACT updated questions (your 12-question set)
+  EXACT updated questions you provided earlier.
 */
 const questions = [
   {
@@ -206,6 +206,11 @@ export default function App() {
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
+              /* GLOW added ONLY: soft golden glow on title */
+              style={{
+                textShadow: "0 0 12px #facc15, 0 0 28px #facc15, 0 0 48px #facc15",
+                color: "#FFE69A",
+              }}
             >
               Privacy-Cyber Duel
             </motion.h1>
@@ -217,6 +222,10 @@ export default function App() {
               whileTap={{ scale: 0.97 }}
               onClick={() => setStarted(true)}
               className="bg-yellow-400 text-black px-8 py-4 rounded-2xl text-2xl font-bold shadow-lg hover:bg-yellow-300"
+              /* GLOW added ONLY: glow on the start button */
+              style={{
+                boxShadow: "0 0 12px #facc15, 0 0 28px #facc15, 0 0 48px #facc15",
+              }}
             >
               ⚔️ Start Duel
             </motion.button>
